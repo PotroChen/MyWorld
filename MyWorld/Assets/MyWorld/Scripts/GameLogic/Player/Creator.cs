@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using QFramework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ public class Creator : Player
 {
     public float speed =1f;
     public float angleSpeed = 2f;
+
+    private Camera camera;
+    private GameObject target;
+
     private float lastSpeed;
 
     public static Player Born()
@@ -19,16 +24,25 @@ public class Creator : Player
         GameObject player = new GameObject("Creator");
         player.transform.position = position;
         player.transform.rotation = rotation;
-        Player playerCom = player.AddComponent<Creator>();
+
+        Creator playerCom = player.AddComponent<Creator>();
+        playerCom.Init();
+
         return playerCom;
     }
 
-    public void Awake()
+    protected override void Init()
     {
-        gameObject.AddComponent<Camera>();
+        camera = gameObject.AddComponent<Camera>();
+        ResLoader resLoader = new ResLoader();
+
+        GameObject targetPre =  resLoader.LoadSync<GameObject>("Target");
+        target = GameObject.Instantiate(targetPre);
+
+        target.SetActive(false);
     }
 
-    public void Update()
+    private void Update()
     {
         #region 移动
         if (Input.GetKey(KeyCode.A))
@@ -78,8 +92,28 @@ public class Creator : Player
         #endregion
 
         #region 发射射线
+        Ray ray =camera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f));
+        RaycastHit raycastHit;
+        if (Physics.Raycast(ray, out raycastHit, 10f, 1 << LayerMask.NameToLayer("Cube")))
+        {
+            Debug.DrawLine(ray.origin, raycastHit.point, Color.green);
+
+            target.transform.position = raycastHit.transform.position + raycastHit.normal * 1f;
+            target.SetActive(true);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 pos = target.transform.position;
+                Cube.Create(new CubeInfo(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)));
+
+            }
 
 
+        }
+        else
+        {
+            target.SetActive(false);
+        }
 
         #endregion
 

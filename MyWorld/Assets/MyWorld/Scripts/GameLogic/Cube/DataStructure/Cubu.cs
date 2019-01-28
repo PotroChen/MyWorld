@@ -20,8 +20,11 @@ class Cube:MonoBehaviour
     {
         ResLoader resLoader = new ResLoader();
 
-        GameObject cubePrefab = Resources.Load("Cube/Cube") as GameObject;
+        GameObject cubePrefab = resLoader.LoadSync("Cube") as GameObject;
+
         GameObject cubeObj = GameObject.Instantiate(cubePrefab);
+        cubeObj.transform.position = new Vector3(cubeInfo.X, cubeInfo.Y, cubeInfo.Z);
+
         Cube cube = cubeObj.AddComponent<Cube>();
         cube.m_CubeInfo = cubeInfo;
 

@@ -4,11 +4,23 @@ using UnityEngine;
 using QFramework;
 
 [QMonoSingletonPath("[GameLogic]/GameMgr")]
-public class GameMgr : MonoSingleton<ResMgr>, IEnumeratorTaskMgr
+public class GameMgr : QMgrBehaviour, ISingleton
 {
 
     public CubeInfo3DArray cubeInfoStore = new CubeInfo3DArray();
 
+    public override int ManagerId
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public void OnSingletonInit()
+    {
+        throw new System.NotImplementedException();
+    }
 
     private void Awake()
     {
@@ -18,7 +30,7 @@ public class GameMgr : MonoSingleton<ResMgr>, IEnumeratorTaskMgr
 
 
         Cursor.visible = false;
-        UIManager.Instance.OpenUI("resources://UI/Aim", UILevel.Common);
+        UIManager.Instance.OpenUI("Aim", UILevel.Common);
 
         Player creator = Creator.Born(new Vector3(0f,0f,-10f),Quaternion.identity);
         if (cubeInfoStore.Count == 0)
