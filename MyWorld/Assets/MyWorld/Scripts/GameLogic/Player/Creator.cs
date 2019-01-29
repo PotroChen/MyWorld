@@ -9,7 +9,7 @@ public class Creator : Player
     public float speed =1f;
     public float angleSpeed = 2f;
 
-    private Camera camera;
+    private new Camera camera;
     private GameObject target;
 
     private float lastSpeed;

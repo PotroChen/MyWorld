@@ -6,8 +6,7 @@ using QFramework;
 [QMonoSingletonPath("[GameLogic]/GameMgr")]
 public class GameMgr : QMgrBehaviour, ISingleton
 {
-
-    public CubeInfo3DArray cubeInfoStore = new CubeInfo3DArray();
+    //public CubeInfo3DArray cubeInfoStore = new CubeInfo3DArray();
 
     public override int ManagerId
     {
@@ -17,37 +16,41 @@ public class GameMgr : QMgrBehaviour, ISingleton
         }
     }
 
-    public void OnSingletonInit()
+    public override void Init()
     {
-        throw new System.NotImplementedException();
-    }
-
-    private void Awake()
-    {
-        ResMgr.Init();
-        UIManager.Instance.Show();
-
-
-
+        base.Init();
         Cursor.visible = false;
         UIManager.Instance.OpenUI("Aim", UILevel.Common);
+        Player creator = Creator.Born(new Vector3(0f, 0f, -10f), Quaternion.identity);
+    }
 
-        Player creator = Creator.Born(new Vector3(0f,0f,-10f),Quaternion.identity);
-        if (cubeInfoStore.Count == 0)
+    #region 单例
+
+    private static GameMgr mInstance;
+
+    public static GameMgr Instance
+    {
+        get
         {
-            cubeInfoStore.Add(new CubeInfo2DArray());
-            cubeInfoStore[0].Add(new CubeInfoArray());
-            cubeInfoStore[0][0].Add(Cube.Create().CubeInfo);
+            if (null == mInstance)
+            {
+                mInstance = FindObjectOfType<GameMgr>();
+            }
+
+            if (null == mInstance)
+            {
+                mInstance = MonoSingletonProperty<GameMgr>.Instance;
+                mInstance.name = "GameMgr";
+                DontDestroyOnLoad(mInstance);
+            }
+
+            return mInstance;
         }
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void OnSingletonInit()
+    {
+        Log.I("GameMgr.OnSingletonInit");
+    }
+    #endregion
 }
