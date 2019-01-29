@@ -96,7 +96,34 @@ public class CubeModule : QMgrBehaviour, ISingleton
 
     }
 
+    public void RegisterCubeInfo(Cube cube)
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
 
+        CubeInfo cubeInfo = new CubeInfo();
+        cubeInfo.Position = cube.Position;
+
+        if (!CubeInfoStore.ContainsKey(sceneName))
+            CubeInfoStore.Add(sceneName, new List<CubeInfo>());
+
+        CubeInfoStore[sceneName].Add(cubeInfo);
+    }
+
+    public void UnRegisterCubeInfo(Cube cube)
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        CubeInfo cubeInfo = new CubeInfo();
+        cubeInfo.Position = cube.Position;
+
+        if (!CubeInfoStore.ContainsKey(sceneName))
+            return;
+
+        if (!CubeInfoStore[sceneName].Contains(cubeInfo))
+            return;
+
+        CubeInfoStore[sceneName].Remove(cubeInfo);
+    }
 
     #region µ¥Àý
 

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using QFramework;
 
 //Cubu应该数据和行为在一起吗？
-class Cube:MonoBehaviour
+public class Cube : MonoBehaviour
 {
     public Vector3Int Position
     {
@@ -27,6 +27,7 @@ class Cube:MonoBehaviour
         return Create(cubeInfo.Position);
     }
 
+    //原型
     public static Cube Create(Vector3Int position)
     {
         ResLoader resLoader = new ResLoader();
@@ -37,7 +38,10 @@ class Cube:MonoBehaviour
         Cube cube = cubeObj.AddComponent<Cube>();
         cube.Position = position;
 
+        CubeModule.Instance.RegisterCubeInfo(cube);
         return cube;
     }
+    
+
     
 }
