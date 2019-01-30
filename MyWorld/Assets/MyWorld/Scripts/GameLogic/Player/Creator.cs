@@ -104,8 +104,8 @@ public class Creator : Player
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 pos = target.transform.position;
-                Cube.Create(new CubeInfo(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)));
-
+                Cube cube = Cube.Create(new CubeInfo(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)));
+                CubeModule.Instance.RegisterCubeInfo(cube);
             }
 
 

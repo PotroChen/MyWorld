@@ -1,6 +1,9 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using QFramework;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,7 +33,9 @@ public class CubeModule : QMgrBehaviour, ISingleton
         }
     }
 
-    private Dictionary<string, List<CubeInfo>> CubeInfoStore;
+    private Dictionary<string,CubeInfo> CubeInfoStore;//<Key,Value> = <X-Y-Z,CubeInfo>
+    private static readonly string fileStorePath = FilePath.PersistentDataPath+ "/TerrainInfo/";
+
 
     public override void Init()
     {
@@ -38,7 +43,8 @@ public class CubeModule : QMgrBehaviour, ISingleton
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnLoaded;
 
-        CubeInfoStore = ReadCubeInfoes();//读取地图信息
+        CubeInfoStore = ReadCubeInfoes(SceneManager.GetActiveScene().name);//读取地图信息
+
         GenerateTerrain(SceneManager.GetActiveScene().name);//生成地图
     }
 
@@ -46,12 +52,24 @@ public class CubeModule : QMgrBehaviour, ISingleton
     private void OnSceneLoaded(Scene scene,LoadSceneMode loadSceneMode)
     {
         cubeRoot = null;
+        ReadCubeInfoes(scene.name);
         GenerateTerrain(scene.name);
     }
 
     private void OnSceneUnLoaded(Scene scene)
     {
-        SaveCubeInfoes();
+        SaveCubeInfoes(scene.name);
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if(pause)
+            SaveCubeInfoes(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveCubeInfoes(SceneManager.GetActiveScene().name);
     }
     #endregion
 
@@ -62,21 +80,16 @@ public class CubeModule : QMgrBehaviour, ISingleton
 
         if (CubeInfoStore == null)
             infoEmpty = true;
-        else if (!CubeInfoStore.ContainsKey(sceneName))
-            infoEmpty = true;
 
         if (infoEmpty)
             Cube.Create();
         else
         {
-            List<CubeInfo> terrainInfo = CubeInfoStore[sceneName];
-            foreach (var cubeinfo in terrainInfo)
+            foreach (var kvp in CubeInfoStore)
             {
-                Cube.Create(cubeinfo);
+                Cube.Create(kvp.Value);
             }
         }
-
-
     }
 
     private void DestroyCurrentTerrain()
@@ -86,43 +99,88 @@ public class CubeModule : QMgrBehaviour, ISingleton
     }
     #endregion
 
-    private Dictionary<string, List<CubeInfo>> ReadCubeInfoes()
+
+
+    private Dictionary<string, CubeInfo> ReadCubeInfoes(string sceneName)
     {
-        return null;
+        Dictionary<string, CubeInfo> cubeInfoes = null;
+        string readPath = fileStorePath + sceneName + ".json";
+
+        try
+        {
+            using (StreamReader file = File.OpenText(readPath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                cubeInfoes = (Dictionary<string, CubeInfo>)serializer.Deserialize(file, typeof(Dictionary<string, CubeInfo>));
+            }
+            Debug.Log("ReadCubeInfo Succeed!SceneName:" + sceneName);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("ReadCubeInfo Failed,Exception:" + e.ToString());
+        }
+        
+        return cubeInfoes;
     }
 
-    private void SaveCubeInfoes()
+    private void SaveCubeInfoes(string sceneName)
     {
+        string outputPath = fileStorePath + sceneName + ".json";
+
+        if (!Directory.Exists(fileStorePath))
+            Directory.CreateDirectory(fileStorePath);
+
+        try
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+
+            using (StreamWriter sw = new StreamWriter(outputPath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, CubeInfoStore);
+            }
+            Debug.Log("SaveCubeInfoes Succeed!SceneName:" + sceneName);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("SaveCubeInfoes Failed,Exception:" + e.ToString());
+        }
 
     }
+
+
 
     public void RegisterCubeInfo(Cube cube)
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-
         CubeInfo cubeInfo = new CubeInfo();
         cubeInfo.Position = cube.Position;
 
-        if (!CubeInfoStore.ContainsKey(sceneName))
-            CubeInfoStore.Add(sceneName, new List<CubeInfo>());
+        if (CubeInfoStore == null)
+            CubeInfoStore = new Dictionary<string, CubeInfo>();
 
-        CubeInfoStore[sceneName].Add(cubeInfo);
+        string key = string.Format("{0}-{1}-{2}", cubeInfo.Position.x, cubeInfo.Position.y, cubeInfo.Position.z);
+
+        if (CubeInfoStore.ContainsKey(key))
+            CubeInfoStore[key] = cubeInfo;
+        else
+            CubeInfoStore.Add(key, cubeInfo);
     }
 
     public void UnRegisterCubeInfo(Cube cube)
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-
         CubeInfo cubeInfo = new CubeInfo();
         cubeInfo.Position = cube.Position;
 
-        if (!CubeInfoStore.ContainsKey(sceneName))
+        if (CubeInfoStore == null)
             return;
 
-        if (!CubeInfoStore[sceneName].Contains(cubeInfo))
-            return;
+        string key = string.Format("{0}-{1}-{2}", cubeInfo.Position.x, cubeInfo.Position.y, cubeInfo.Position.z);
 
-        CubeInfoStore[sceneName].Remove(cubeInfo);
+        if (CubeInfoStore.ContainsKey(key))
+        {
+            CubeInfoStore.Remove(key);
+        }
     }
 
     #region 单例

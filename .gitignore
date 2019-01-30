@@ -4,3 +4,8 @@
 /MyWorld/.vs
 /MyWorld/Library
 /MyWorld/obj
+/MyWorld/Assembly-CSharp-Editor.csproj
+/MyWorld/ObjectFactory.csproj
+/MyWorld/UniRx.Async.csproj
+/MyWorld/UniRx.Async.Editor.csproj
+/MyWorld/UniRx.csproj

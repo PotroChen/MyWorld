@@ -38,6 +38,4 @@ public class CubeInfo{
         else
             return false;
     }
-
-    //重写Euqls
 }
