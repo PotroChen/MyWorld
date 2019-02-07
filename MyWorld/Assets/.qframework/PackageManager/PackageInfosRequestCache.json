@@ -5,6 +5,24 @@
       "readme": {
         "items": [
           {
+            "version": "v0.1.21",
+            "content": "FilePath.cs Improvement",
+            "author": "liangxie",
+            "date": "2019 年 02 月 01 日 19:28"
+          },
+          {
+            "version": "v0.1.20",
+            "content": "fix SafeObjectPool's bug",
+            "author": "liangxie",
+            "date": "2019 年 02 月 01 日 19:24"
+          },
+          {
+            "version": "v0.1.19",
+            "content": "support 2018.3 .net 4.6",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 07:24"
+          },
+          {
             "version": "v0.1.18",
             "content": "add UnRegisterTemplate",
             "author": "liangxie",
@@ -115,6 +133,54 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "v0.1.21",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.1.21.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/0.Core/",
+          "Readme": {
+            "version": "v0.1.21",
+            "content": "FilePath.cs Improvement",
+            "author": "liangxie",
+            "date": "2019 年 02 月 01 日 19:28"
+          },
+          "Name": "0.Core",
+          "VersionNumber": 121,
+          "FileName": "0.Core_v0.1.21.unitypackage"
+        },
+        {
+          "Version": "v0.1.20",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.1.20.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/0.Core/",
+          "Readme": {
+            "version": "v0.1.20",
+            "content": "fix SafeObjectPool's bug",
+            "author": "liangxie",
+            "date": "2019 年 02 月 01 日 19:24"
+          },
+          "Name": "0.Core",
+          "VersionNumber": 120,
+          "FileName": "0.Core_v0.1.20.unitypackage"
+        },
+        {
+          "Version": "v0.1.19",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.1.19.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/0.Core/",
+          "Readme": {
+            "version": "v0.1.19",
+            "content": "support 2018.3 .net 4.6",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 07:24"
+          },
+          "Name": "0.Core",
+          "VersionNumber": 119,
+          "FileName": "0.Core_v0.1.19.unitypackage"
+        },
         {
           "Version": "v0.1.18",
           "Type": 0,
@@ -404,18 +470,30 @@
           "FileName": "0.Core_v0.0.6.unitypackage"
         }
       ],
-      "Version": "v0.1.18",
-      "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.1.18.unitypackage",
+      "Version": "v0.1.21",
+      "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.1.21.unitypackage",
       "InstallPath": "Assets/QFramework/Framework/0.Core/",
       "Type": 0,
       "AccessRight": 0,
-      "VersionNumber": 118,
+      "VersionNumber": 121,
       "Installed": true
     },
     {
       "Name": "1.ResKit",
       "readme": {
         "items": [
+          {
+            "version": "v0.1.2",
+            "content": "fix bug",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 13:17"
+          },
+          {
+            "version": "v0.1.1",
+            "content": "add mode",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 10:19"
+          },
           {
             "version": "v0.1.0",
             "content": "adjust folder",
@@ -425,6 +503,38 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "v0.1.2",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/1.ResKit_v0.1.2.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/1.ResKit/",
+          "Readme": {
+            "version": "v0.1.2",
+            "content": "fix bug",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 13:17"
+          },
+          "Name": "1.ResKit",
+          "VersionNumber": 102,
+          "FileName": "1.ResKit_v0.1.2.unitypackage"
+        },
+        {
+          "Version": "v0.1.1",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/1.ResKit_v0.1.1.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/1.ResKit/",
+          "Readme": {
+            "version": "v0.1.1",
+            "content": "add mode",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 10:19"
+          },
+          "Name": "1.ResKit",
+          "VersionNumber": 101,
+          "FileName": "1.ResKit_v0.1.1.unitypackage"
+        },
         {
           "Version": "v0.1.0",
           "Type": 0,
@@ -442,18 +552,30 @@
           "FileName": "1.ResKit_v0.1.0.unitypackage"
         }
       ],
-      "Version": "v0.1.0",
-      "DownloadUrl": "http://liangxiegame.com/media/1.ResKit_v0.1.0.unitypackage",
+      "Version": "v0.1.2",
+      "DownloadUrl": "http://liangxiegame.com/media/1.ResKit_v0.1.2.unitypackage",
       "InstallPath": "Assets/QFramework/Framework/1.ResKit/",
       "Type": 0,
       "AccessRight": 0,
-      "VersionNumber": 100,
+      "VersionNumber": 102,
       "Installed": true
     },
     {
       "Name": "2.UIKit",
       "readme": {
         "items": [
+          {
+            "version": "v0.2.5",
+            "content": "fix gen code error",
+            "author": "liangxie",
+            "date": "2019 年 02 月 03 日 12:55"
+          },
+          {
+            "version": "v0.2.4",
+            "content": "add comment",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 10:41"
+          },
           {
             "version": "v0.2.3",
             "content": "fix compile error",
@@ -523,6 +645,38 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "v0.2.5",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/2.UIKit_v0.2.5.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/2.UIKit/",
+          "Readme": {
+            "version": "v0.2.5",
+            "content": "fix gen code error",
+            "author": "liangxie",
+            "date": "2019 年 02 月 03 日 12:55"
+          },
+          "Name": "2.UIKit",
+          "VersionNumber": 205,
+          "FileName": "2.UIKit_v0.2.5.unitypackage"
+        },
+        {
+          "Version": "v0.2.4",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/2.UIKit_v0.2.4.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/2.UIKit/",
+          "Readme": {
+            "version": "v0.2.4",
+            "content": "add comment",
+            "author": "liangxie",
+            "date": "2019 年 01 月 31 日 10:41"
+          },
+          "Name": "2.UIKit",
+          "VersionNumber": 204,
+          "FileName": "2.UIKit_v0.2.4.unitypackage"
+        },
         {
           "Version": "v0.2.3",
           "Type": 0,
@@ -700,12 +854,12 @@
           "FileName": "2.UIKit_v0.1.0.unitypackage"
         }
       ],
-      "Version": "v0.2.3",
-      "DownloadUrl": "http://liangxiegame.com/media/2.UIKit_v0.2.3.unitypackage",
+      "Version": "v0.2.5",
+      "DownloadUrl": "http://liangxiegame.com/media/2.UIKit_v0.2.5.unitypackage",
       "InstallPath": "Assets/QFramework/Framework/2.UIKit/",
       "Type": 0,
       "AccessRight": 0,
-      "VersionNumber": 203,
+      "VersionNumber": 205,
       "Installed": false
     },
     {
@@ -1117,6 +1271,12 @@
       "readme": {
         "items": [
           {
+            "version": "v0.0.18",
+            "content": "code gen improvement",
+            "author": "liangxie",
+            "date": "2019 年 02 月 03 日 14:57"
+          },
+          {
             "version": "v0.0.17",
             "content": "fix:load assembly bug",
             "author": "liangxie",
@@ -1173,6 +1333,22 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "v0.0.18",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/Framework_v0.0.18.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework",
+          "Readme": {
+            "version": "v0.0.18",
+            "content": "code gen improvement",
+            "author": "liangxie",
+            "date": "2019 年 02 月 03 日 14:57"
+          },
+          "Name": "Framework",
+          "VersionNumber": 18,
+          "FileName": "Framework_v0.0.18.unitypackage"
+        },
         {
           "Version": "v0.0.17",
           "Type": 0,
@@ -1334,12 +1510,12 @@
           "FileName": "Framework_v0.0.1.unitypackage"
         }
       ],
-      "Version": "v0.0.17",
-      "DownloadUrl": "http://liangxiegame.com/media/Framework_v0.0.17.unitypackage",
+      "Version": "v0.0.18",
+      "DownloadUrl": "http://liangxiegame.com/media/Framework_v0.0.18.unitypackage",
       "InstallPath": "Assets/QFramework/Framework",
       "Type": 0,
       "AccessRight": 0,
-      "VersionNumber": 17,
+      "VersionNumber": 18,
       "Installed": true
     },
     {
@@ -2521,6 +2697,12 @@
       "readme": {
         "items": [
           {
+            "version": "v0.0.8",
+            "content": "适应 framework v0.0.17\nToLua 初始化成功",
+            "author": "vin129",
+            "date": "2019 年 02 月 01 日 17:47"
+          },
+          {
             "version": "v0.0.6",
             "content": "update UILuaPanel",
             "author": "vin129",
@@ -2541,6 +2723,22 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "v0.0.8",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/ScriptKit_v0.0.8.unitypackage",
+          "InstallPath": "Assets/QFramework/ScriptKit/",
+          "Readme": {
+            "version": "v0.0.8",
+            "content": "适应 framework v0.0.17\nToLua 初始化成功",
+            "author": "vin129",
+            "date": "2019 年 02 月 01 日 17:47"
+          },
+          "Name": "ScriptKit",
+          "VersionNumber": 8,
+          "FileName": "ScriptKit_v0.0.8.unitypackage"
+        },
         {
           "Version": "v0.0.6",
           "Type": 0,
@@ -2606,12 +2804,12 @@
           "FileName": "ScriptKit_v0.0.4.unitypackage"
         }
       ],
-      "Version": "v0.0.6",
-      "DownloadUrl": "http://liangxiegame.com/media/ScriptKit_v0.0.6.unitypackage",
+      "Version": "v0.0.8",
+      "DownloadUrl": "http://liangxiegame.com/media/ScriptKit_v0.0.8.unitypackage",
       "InstallPath": "Assets/QFramework/ScriptKit/",
       "Type": 0,
       "AccessRight": 0,
-      "VersionNumber": 6,
+      "VersionNumber": 8,
       "Installed": false
     },
     {

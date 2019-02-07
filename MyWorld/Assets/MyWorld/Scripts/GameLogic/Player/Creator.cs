@@ -108,6 +108,13 @@ public class Creator : Player
                 CubeModule.Instance.RegisterCubeInfo(cube);
             }
 
+            if (Input.GetMouseButtonDown(1))
+            {
+                Cube cube = raycastHit.collider.GetComponent<Cube>();
+                Cube.Destroy(cube);
+                CubeModule.Instance.UnRegisterCubeInfo(cube);
+            }
+
 
         }
         else

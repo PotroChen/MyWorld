@@ -39,4 +39,9 @@ public class Cube : MonoBehaviour
 
         return cube;
     }
+
+    public static void Destroy(Cube cube)
+    {
+        Destroy(cube.gameObject);
+    }
 }
