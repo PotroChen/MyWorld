@@ -1,14 +1,13 @@
 using QFramework;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using CubeModule;
 
 public class GameEntry : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
         ResMgr.Init();
-        CubeModule.Instance.Init();
+        CubeMgr.Instance.Init();
         
         GameMgr.Instance.Init();
     }

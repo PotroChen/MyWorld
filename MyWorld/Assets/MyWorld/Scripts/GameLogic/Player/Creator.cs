@@ -2,17 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CubeModule;
 
 public class Creator : Player
 {
-    public float speed =1f;
-    public float angleSpeed = 2f;
-
-    private new Camera camera;
-    private GameObject target;
-
-    private float lastSpeed;
 
     public static Player Born()
     {
@@ -31,55 +24,44 @@ public class Creator : Player
         return playerCom;
     }
 
-    protected override void Init()
+    protected override void Translate()
     {
-        camera = gameObject.AddComponent<Camera>();
-        ResLoader resLoader = new ResLoader();
-
-        GameObject targetPre =  resLoader.LoadSync<GameObject>("Target");
-        target = GameObject.Instantiate(targetPre);
-
-        target.SetActive(false);
-    }
-
-    private void Update()
-    {
-        #region 移动
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= transform.right * Time.deltaTime *speed;
+            transform.position -= transform.right * Time.deltaTime * TranslateSpeed;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += transform.right * Time.deltaTime * speed;
+            transform.position += transform.right * Time.deltaTime * TranslateSpeed;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= transform.forward * Time.deltaTime * speed;
+            transform.position -= transform.forward * Time.deltaTime * TranslateSpeed;
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += transform.forward * Time.deltaTime * speed;
+            transform.position += transform.forward * Time.deltaTime * TranslateSpeed;
         }
 
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.position += transform.up * Time.deltaTime * speed;
+            transform.position += transform.up * Time.deltaTime * TranslateSpeed;
         }
 
         if (Input.GetKey(KeyCode.X))
         {
-            transform.position -= transform.up * Time.deltaTime * speed;
+            transform.position -= transform.up * Time.deltaTime * TranslateSpeed;
         }
-        #endregion
-
-        #region 转向
+    }
+    //旋转
+    protected override void Rotate()
+    {
         //float mouseX = transform.Rotate() Input.GetAxis("Mouse X") * angleSpeed;
-        float mouseX = Input.GetAxis("Mouse X") * angleSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * angleSpeed;
+        float mouseX = Input.GetAxis("Mouse X") * AngleSpeed;
+        float mouseY = Input.GetAxis("Mouse Y") * AngleSpeed;
 
         Vector3 angles = transform.rotation.eulerAngles;
 
@@ -89,10 +71,11 @@ public class Creator : Player
         angles.x -= mouseY;
         //transform.forward += new Vector3(mouseX, mouseY, 0) *Time.deltaTime;
         transform.eulerAngles = angles;
-        #endregion
+    }
 
-        #region 发射射线
-        Ray ray =camera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f));
+    protected override void Interact()
+    {
+        Ray ray = (camera as Camera).ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f));
         RaycastHit raycastHit;
         if (Physics.Raycast(ray, out raycastHit, 10f, 1 << LayerMask.NameToLayer("Cube")))
         {
@@ -101,28 +84,21 @@ public class Creator : Player
             target.transform.position = raycastHit.transform.position + raycastHit.normal * 1f;
             target.SetActive(true);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))//TODO 鼠标左键放置方块或者物品（集体操作应该由手中得物品决定）
             {
                 Vector3 pos = target.transform.position;
-                Cube cube = Cube.Create(new CubeInfo(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)));
-                CubeModule.Instance.RegisterCubeInfo(cube);
+                CubeMgr.Instance.GenerateCube(new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z)));
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1))//TODO 鼠标右键删除物品（可能需要去掉）
             {
-                Cube cube = raycastHit.collider.GetComponent<Cube>();
-                Cube.Destroy(cube);
-                CubeModule.Instance.UnRegisterCubeInfo(cube);
+                Cube cube = raycastHit.collider.GetComponent<Cube>();//TODO 是否改成根据坐标删除呢
+                CubeMgr.Instance.DeleteCube(cube);
             }
-
-
         }
         else
         {
             target.SetActive(false);
         }
-
-        #endregion
-
     }
 }
